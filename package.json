@@ -7,8 +7,8 @@
     "node": "18.x"
   },
   "scripts": {
-    "start":"node ./src/server.ts",
     "dev": "ts-node-dev ./src/server.ts",
+    "vercel-build": "npx prisma migrate deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
