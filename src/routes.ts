@@ -13,7 +13,7 @@ export const router = Router();
 //login
 router.post('/login', new loginController().handle)
 //Only logged-in adm - create users
-router.post('/create',isAdminAuthenticated, new CreateUserController().handle)
+router.post('/create', new CreateUserController().handle)
 //Only logged-in users - List users 
 router.get('/list', isAuthenticated, new DetailUserController().handle )
 //Only logged-in users - delete user
