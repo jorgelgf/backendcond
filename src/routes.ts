@@ -1,4 +1,4 @@
-import {Router } from 'express'
+import {Router, NextFunction, Request, Response } from 'express'
 
 import { CreateUserController, loginController,DetailUserController, 
   CreateRegisterController,DetailUserRegisterController, DeleteRegisterController, 
@@ -31,4 +31,8 @@ router.delete("/register/remove", isAuthenticated, new DeleteRegisterController(
 
 
 
-router.post('/', ()=>console.log('Server on1'))
+router.get('/', (req:Request,res:Response, next:NextFunction)=>{ 
+  console.log('Servidor online')
+
+  return res.json({ok:"Servidor online!"});
+})
