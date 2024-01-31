@@ -30,3 +30,5 @@ router.post('/register/user',isAuthenticated, new DetailUserRegisterController()
 router.delete("/register/remove", isAuthenticated, new DeleteRegisterController().handle)
 
 
+
+router.post('/', ()=>console.log('Server on1'))
