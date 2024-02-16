@@ -6,7 +6,6 @@ interface UserRequest{
     email: string;
     password: string;
     house: String;
-    role:String;
    
 }
 
