@@ -6,12 +6,14 @@ interface UserRequest{
     email: string;
     password: string;
     house: String;
+    role:String;
+   
 }
 
 export class CreateUserService{
   async execute ({name,email,password,house}:UserRequest){
   //verify email
-      if(!email || !password || !name || !house){
+      if(!email || !password || !name || !house ){
         throw new Error("Está faltando informações");
       }
               const userAlreadyExists = await prismaClient.user.findFirst({where:{
@@ -39,7 +41,7 @@ const passwordHash = await hash(password, 8)
 const user = await prismaClient.user.create({
       data:{
         name: name, email:email.toLowerCase(), password:passwordHash, 
-        house:`${house}`,
+        house:`${house}`,role:'2'
       },  
         select:{
             id:true,
