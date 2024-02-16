@@ -23,24 +23,13 @@ export class CreateUserService{
       throw new Error("Usuário já existe")
     }
 
-const userAdmin = await prismaClient.user.findFirst({
-  where:{
-    email: email.toLowerCase(),
-    role:"1"
-  }
-})
-if (userAdmin){
-  throw new Error("Usuário sem permissão")
-}
-
-
 //create hash
 const passwordHash = await hash(password, 8)
 //create user
 const user = await prismaClient.user.create({
       data:{
         name: name, email:email.toLowerCase(), password:passwordHash, 
-        house:`${house}`,role:'2'
+        house:`${house}`
       },  
         select:{
             id:true,
