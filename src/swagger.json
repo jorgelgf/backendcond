@@ -1,0 +1,296 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Products",
+    "description": "Documentation from products api",
+    "version": "1.0.0"
+  },
+  "basePath": "/",
+
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Operações relacionadas a usuários"
+    },
+    {
+      "name": "Register",
+      "description": "Operações relacionadas a registros"
+    }
+  ],
+  "paths": {
+
+    "/login": {
+      "post": {
+        "tags": ["Users"],
+        "summary":"Login de usuário no portal",
+        "description":"Se faz necessário o uso de e-mail e senha já cadastrado no banco",
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+
+            "application/json": {
+              "schema": {
+
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                  
+                },
+                "example": {
+                  "email": "teste@teste.com",
+                  "password": "123456"
+                  
+                }
+              }
+            }
+          }
+        },
+        
+      "responses": {
+        "401": {
+          "description": "Não autorizado"
+        },
+        "200": {
+          "description": "OK"
+        }
+      }
+      }
+    },
+
+    "/create": {
+      "post": {
+        "tags": ["Users"],
+        "summary":"Criação de usuário",
+        "description":"Se faz necessário o login com super usuário para utilizar o seu token para criação de novos usuários",
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                   "name": {
+                    "type": "string"
+                  },
+                  "house": {
+                    "type": "string"
+                  }
+                  
+                },
+                "example": {
+                  "email": "teste@teste.com",
+                  "house": "3x",
+                  "name": "test",
+                  "password": "123456"
+                  
+                }
+              }
+            }
+          }
+        },
+        
+      "responses": {
+        "401": {
+          "description": "Unauthorized"
+        },
+        "400": {
+          "description": "Usuário já existe"
+        },
+        "200": {
+          "description": "OK"
+        }
+      }
+      }
+    },
+    "/list": {
+      "get": {
+        "tags": ["Users"],
+        "summary":"Listagem de usuários",
+        "description":"Se faz necessário algum token para listagem dos usuários",
+        "security": [{"bearerAuth": []}],
+       
+        
+      "responses": {
+        "401": {
+          "description": "Não autorizado"
+        },
+        "400": {
+          "description": "Usuário não existe"
+        },
+        "200": {
+          "description": "OK"
+        }
+      }
+      }
+    },
+    "/user/remove": {
+      "delete": {
+        "tags": ["Users"],
+        "summary":"Remoção de usuários",
+        "description":"Se faz necessário o ID de usuário e token do super usuário para remoção",
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        
+      "responses": {
+        "401": {
+          "description": "Não autorizado"
+        },
+        "400": {
+          "description": "Não existe usuário"
+        },
+        "200": {
+          "description": "OK"
+        }
+      }
+      }
+    },
+    "/register": {
+      "post": {
+        "tags": ["Register"],
+        "summary":"Criação de registro",
+        "description":"Se faz necessário o ID e info (data) para armazenamento do registro associado ao usuário \n\n Também é necessário token",
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "info": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  }                  
+                },
+                "example": {
+                  "info": "01/01/2001",
+                  "id": "aaa000aaa"
+                  
+                }
+              }
+              
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          },
+          "400": {
+            "description": "Já existe a informação"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+        }
+      },
+      "/register/all": {
+        "get": {
+          "tags": ["Register"],
+          "summary":"Listagem dos registros",
+          "description":"Listagem de todos os registros salvos \n\n Se faz necessário o token de usuário logado",
+          "security": [{"bearerAuth": []}],
+         
+          
+        "responses": {
+          "401": {
+            "description": "Não autorizado"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+        }
+      },
+      "/register/user": {
+        "post": {
+          "tags": ["Register"],
+          "summary":"Listagem de registro de usuário",
+          "description":"Se faz necessário o token do usuário",
+          "security": [{"bearerAuth": []}],
+          "requestBody": {
+            "content": {
+              "application/json": {
+           
+                
+              }
+            }
+          },
+          "responses": {
+            "401": {
+              "description": "Não autorizado"
+            },
+         
+            "200": {
+              "description": "OK"
+            }
+          }
+          }
+        },
+        "/register/remove": {
+          "delete": {
+            "tags": ["Register"],
+            "summary":"Remoção de registro de usuário",
+            "description":"Se faz necessário o ID do registro do usuário e token",
+            "security": [{"bearerAuth": []}],
+            "parameters": [
+              {
+                "in": "query",
+                "name": "id_register",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                    "description": "ID do registro do usuário"
+                }
+              }
+            ],
+            
+          "responses": {
+            "401": {
+              "description": "Não autorizado"
+            },
+            "400": {
+              "description": "Não existe registro"
+            },
+            "200": {
+              "description": "OK"
+            }
+          }
+          }
+        }
+      }
+
+    }  
+    
+  

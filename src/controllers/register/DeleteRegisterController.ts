@@ -6,7 +6,8 @@ export class DeleteRegisterController {
     console.log('DELETE : DELETE REGISTER')
 
     const deleteRegisterService = new DeleteRegisterService();
-    const id_register= req.query.id as string;
+    const id_register= req.query.id_register as string;
+
 if(!id_register){
   return res.status(400).json({error: "Id do registro não encontrado"})
 }
