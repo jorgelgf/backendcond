@@ -7,7 +7,7 @@ export class DetailUserRegisterController{
  console.log('POST : DETAIL REGISTER USER')
     const detailUserRegisterService = new DetailUserRegisterService();
     const detail = await detailUserRegisterService.execute(user_id)
-    console.log(user_id)
+
     return res.json(detail)
   }
 }

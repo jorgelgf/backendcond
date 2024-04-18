@@ -267,7 +267,7 @@
             "parameters": [
               {
                 "in": "query",
-                "name": "id_register",
+                "name": "id_",
                 "required": true,
                 "schema": {
                   "type": "string",
