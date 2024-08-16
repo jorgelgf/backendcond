@@ -2,7 +2,7 @@
 
 ## Tecnologias utilizadas
 
-Node + Express + Prisma + PostgreSQL + Swagger
+Typescript + Node + Express + Prisma + PostgreSQL + Swagger
 
 Endpoint: https://backendcond.vercel.app/
 </br>
