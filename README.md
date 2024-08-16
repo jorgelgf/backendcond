@@ -1,6 +1,6 @@
 # Backend Condominium
 
-## Technologies used
+## Tecnologias utilizadas
 
 Node + Express + Prisma + MySQL + Swagger
 
